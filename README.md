@@ -1,8 +1,6 @@
 # ToDoLy
 
-Solution for Final Project Web App assignment
-
-A Todo List Web Application
+Solution for Final Project Web App assignment - a Todo List
 
 A functioning MVC application that support full CRUD
 

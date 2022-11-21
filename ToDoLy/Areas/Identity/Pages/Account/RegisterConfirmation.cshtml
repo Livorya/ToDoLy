@@ -1,0 +1,29 @@
+﻿@page
+@model RegisterConfirmationModel
+@{
+    ViewData["Title"] = "Register confirmation";
+}
+
+<div class="custom-box">
+    <h1>@ViewData["Title"]</h1>
+    <div class="row justify-content-sm-center">
+        <div class="col-sm-10 col-xl-8">
+            @{
+                if (@Model.DisplayConfirmAccountLink)
+                {
+                    <p>
+                        This prototype application does not currently support real email sended registration.
+                    </p>
+                    <a id="confirm-link" href="@Model.EmailConfirmationUrl" class="w-100 btn btn-lg btn-primary my-3">Click here to confirm your account</a>
+                }
+                else
+                {
+                    <p>
+                            Please check your email to confirm your account.
+                    </p>
+                }
+            }
+        </div>
+    </div>
+</div>
+

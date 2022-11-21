@@ -1,0 +1,165 @@
+/* COLOR */
+:root {
+    --coffe: #342619;
+    --creme: #fef5e5;
+    --darkcreme: #f7e9d1;
+    --latte: #e0caa5;
+    --darklatte: #d1bd9a;
+    --rose: #d8bfd8;
+    --darkrose: #c1abc1;
+    --danger: #e4aaaa;
+    --darkdanger: #cf8f8f;
+    --link: #5b6a9e;
+    --linkhover: #8a5b9e;
+}
+
+/* SIZE */
+html {
+    font-size: 14px;
+}
+
+.custom-btn-size {
+    height: 51px;
+    width: 51px;
+    font-size: 22px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+
+    .custom-box {
+        margin: auto;
+        width: 80%;
+    }
+
+    .custom-btn-size {
+        height: 58px;
+        width: 58px;
+        font-size: 28px;
+    }
+}
+
+@media (min-width: 992px) {
+    .custom-box {
+        margin: auto;
+        width: 60%;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+/* STYLE */
+body {
+    font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+    color: var(--coffe);
+    margin-bottom: 60px;
+    background-image: url('../images/floral.png');
+    background-repeat: repeat;
+}
+
+/* TABLE */
+table {
+    color: var(--coffe);
+    background-color: var(--darkcreme);
+}
+
+table > thead {
+    background-color: var(--latte);
+}
+
+/* LINK */
+a {
+    color: var(--link);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--linkhover);
+}
+
+/* CUSTOM */
+.custom-border {
+    border: 1px var(--coffe);
+}
+
+.custom-box {
+    background-color: var(--creme);
+    border: 1px solid var(--coffe);
+    border-radius: 3px;
+    padding: 1em;
+}
+
+.custom-hover:hover {
+    background-color: var(--darkcreme);
+    border-radius: 3px;
+}
+
+.custom-mt {
+    margin-top: 5em;
+}
+
+.custom-ms {
+    margin-left: 1px;
+}
+ 
+/* NAVBAR */
+.nav-link {
+    color: var(--coffe) !important;
+}
+
+.nav-link:hover {
+    color: var(--darkcreme) !important;
+}
+
+.nav-pills .nav-link:not(.active) {
+    background-color: transparent !important;
+}
+
+.nav-pills .nav-link:not(.active):hover {
+    color: var(--darklatte) !important;
+}
+
+.nav-pills .nav-link {
+    background-color: var(--rose) !important;
+}
+
+/* BUTTON */
+.btn-primary {
+    color: var(--coffe) !important;
+    background-color: var(--rose) !important;
+    border: 1px solid var(--coffe);
+    border-radius: 3px;
+}
+
+.btn-primary:hover {
+    color: var(--creme) !important;
+    background-color: var(--darkrose) !important;
+    border: 1px solid var(--coffe);
+    border-radius: 3px;
+}
+
+.btn-danger {
+    color: var(--coffe) !important;
+    background-color: var(--danger) !important;
+    border: 1px solid var(--coffe);
+    border-radius: 3px;
+}
+
+.btn-danger:hover {
+    color: var(--creme) !important;
+    background-color: var(--darkdanger) !important;
+    border: 1px solid var(--coffe);
+    border-radius: 3px;
+}
+
+/* BACKGROUND */
+.bg-primary {
+    color: var(--coffe) !important;
+    background-color: var(--rose) !important;
+}
+

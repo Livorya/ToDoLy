@@ -1,0 +1,79 @@
+﻿@using System.Globalization
+@model ToDoLy.Models.ToDoTask
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="custom-box">
+    <h1>Details</h1>
+
+    <div>
+        <h4>ToDoTask</h4>
+        <hr />
+        @* Division that shows a task details *@
+        <dl class="row">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Title)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Project)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Project)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Status)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Status)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.StartDate)
+            </dt>
+            <dd class="col-sm-9">
+                @Model.StartDate.ToString("dddd, d MMMM yyyy", new CultureInfo("en-US"))
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.DueDate)
+            </dt>
+            <dd class="col-sm-9">
+                @Model.DueDate.ToString("dddd, d MMMM yyyy", new CultureInfo("en-US"))
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Notes)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.TextAreaFor(model => model.Notes, 6, 40, new {@readonly = "readonly", @style = "background-color: transparent"})
+            </dd>
+
+            @* User namee is only showed to the admin account *@
+            @if (User.Identity?.Name == ViewBag.AdminAccount)
+            {
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.UserName)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.UserName)
+                </dd>
+            }
+        </dl>
+    </div>
+
+    @* Division that shows the links based on if the user is admin or not *@
+    <div>
+        @if (User.Identity?.Name == ViewBag.AdminAccount && Model.UserName != ViewBag.AdminAccount)
+        {
+            <a asp-action="Index">Back to List</a>
+        }
+        else
+        {
+            <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a>
+            <span> | </span>
+            <a asp-action="Index">Back to List</a>
+        }
+    </div>
+</div>

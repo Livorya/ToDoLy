@@ -1,0 +1,37 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center custom-box">
+    <br />
+    <div class="row justify-content-center">
+        <div class="col-sm-10 col-xl-8">
+            <h1 class="display-4">Welcome to ToDoLy</h1>
+            <hr />
+            <p>
+                This is a prototype application.
+            </p>
+            <p>
+                At ToDoLy you can create your very own list of tasks and keep track of yor life. 
+            </p>
+
+            @* A line on the home page only showned if no user is logged in *@
+            @if (!SignInManager.IsSignedIn(User))
+            {
+                <p>
+                    All you need to do is to <em><a asp-area="Identity" asp-page="/Account/Register">register</a></em> a personal account and <em><a asp-area="Identity" asp-page="/Account/Login">login</a></em> to get started.
+                </p>
+            }
+
+            <br />
+            <p>
+                Join us today to get your life organized with the help of ToDoLy. 
+            </p>
+            <img src="~/images/glenn-carstens-peters-rlw-uc03gwc-unsplash.jpg" class="img-fluid rounded-3 mt-3 mb-5" />
+        </div>
+    </div>
+</div>

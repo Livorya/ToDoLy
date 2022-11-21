@@ -1,0 +1,143 @@
+﻿@using System.Globalization
+@using ToDoLy.Controllers
+@using ToDoLy.Data
+
+@model PaginatedList<ToDoLy.Models.ToDoTask>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="custom-box">
+    <h1>Index</h1>
+
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+
+    @* Divsion that contains the searhfield, button and reset link *@
+    <form asp-action="Index" method="get">
+        <div class="row justify-content-center mb-3">
+            <div class="form-floating col-5 p-0">
+                <input type="text" class="form-control" name="SearchString" value="@ViewData["CurrentFilter"]" />
+                <label class="form-label custom-ms">Title or Project</label>
+            </div>
+            <div class="col-1 p-0">
+                <button class="btn btn-primary custom-btn-size" type="submit">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
+            <div class="col-1 p-0 my-auto ms-5 ms-sm-4">
+                <a asp-action="Index">Reset</a>
+            </div>
+        </div>
+    </form>
+    
+    
+    @* Division that contains the table and only shows the user column to the admin account *@
+    <div class="table-responsive">
+        <table class="table table-hover rounded-3 overflow-hidden text-break custom-border">
+            <thead>
+                <tr>
+                    <th>
+                        <i class="fa-solid fa-list-check"></i>
+                    </th>
+                    <th class="col-sm-3">
+                        <a asp-action="Index" asp-route-sortOrder="@ViewData["TitleSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Title</a>
+                    </th>
+                    <th class="col-sm-2">
+                        <a asp-action="Index" asp-route-sortOrder="@ViewData["ProjectSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Project</a>
+                    </th>
+                    <th class="col-sm-2">
+                        <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Due Date</a>
+                    </th>
+                    @if (User.Identity?.Name == ViewBag.AdminAccount)
+                    {
+                        <th class="col-sm-2">
+                            User
+                        </th>
+                    }
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model) {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Project)
+                        </td>
+                        <td>
+                            @item.DueDate.ToString("d MMM. yyyy", new CultureInfo("en-US"))
+                        </td>
+                        @if (User.Identity?.Name == ViewBag.AdminAccount)
+                        {
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UserName)
+                            </td>
+                        }
+
+                        @* The admin account can se other users data but shoud not be able to edit or delete it *@
+                        @if (User.Identity?.Name == ViewBag.AdminAccount && item.UserName != ViewBag.AdminAccount)
+                        {
+                            <td>
+                                <a asp-action="Details" title="Details" asp-route-id="@item.Id">
+                                    <i class="fa-solid fa-eye"></i>
+                                </a>
+                            </td>
+                        }
+                        else 
+                        {
+                            <td>
+                                <a asp-action="Details" title="Details" asp-route-id="@item.Id">
+                                    <i class="fa-solid fa-eye"></i>
+                                </a> |
+                                <a asp-action="Edit" title="Edit" asp-route-id="@item.Id">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a> |
+                                <a asp-action="Delete" title="Delete" asp-route-id="@item.Id">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </a>
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    @{
+        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    }
+
+    @* Division that containd the paging buttons and information of wich page it is *@
+    <div class="row">
+        <div class="col-4 text-start">
+            <a asp-action="Index"
+                asp-route-sortOrder="@ViewData["CurrentSort"]"
+                asp-route-pageNumber="@(Model.PageIndex - 1)"
+                asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                class="btn btn-primary @prevDisabled">
+                Previous
+            </a>
+        </div>
+        <div class="col-4 text-center">
+            Page: @Model.PageIndex/@Model.TotalPages
+        </div>
+        <div class="col-4 text-end">
+            <a asp-action="Index"
+                asp-route-sortOrder="@ViewData["CurrentSort"]"
+                asp-route-pageNumber="@(Model.PageIndex + 1)"
+                asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                class="btn btn-primary @nextDisabled">
+                Next
+            </a>
+        </div>
+    </div>
+</div>

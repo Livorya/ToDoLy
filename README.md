@@ -1,6 +1,7 @@
 # ToDoLy
 
 Solution for Final Project Web App assignment
+
 A Todo List Web Application
 
 A functioning MVC application that support full CRUD
